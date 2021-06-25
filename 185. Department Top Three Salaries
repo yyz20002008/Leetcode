@@ -1,0 +1,10 @@
+https://leetcode.com/problems/department-top-three-salaries/
+
+select Department ,Employee, Salary
+from (
+    select d.Name Department ,e.Name Employee, e.Salary,dense_rank() over(partition by d.id order by salary desc) RK
+    from Employee e
+    join Department d
+    on e.departmentid=d.id
+) A
+where RK<=3
