@@ -8,3 +8,21 @@ from (
     on e.departmentid=d.id
 ) A
 where RK<=3
+
+Method2 Subquery
+
+SELECT d.Name AS Department, e1.Name AS Employee, e1.Salary FROM Employee e1
+JOIN Department d 
+ON e1.DepartmentID = d.Id
+WHERE 3 > (select count(distinct(e2.Salary)) 
+                  from Employee e2 
+                  where e2.Salary > e1.Salary 
+                  and e1.DepartmentId = e2.DepartmentId)
+Method 3 Join
+
+SELECT D.Name as Department, E.Name as Employee, E.Salary 
+FROM Department D, Employee E, Employee E2  
+WHERE D.ID = E.DepartmentId and E.DepartmentId = E2.DepartmentId and 
+E.Salary <= E2.Salary
+group by D.ID,E.Name having count(distinct E2.Salary) <= 3
+order by D.Name, E.Salary desc
