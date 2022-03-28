@@ -1,9 +1,11 @@
-CREATE PROCEDURE expressionsVerification()
+CREATE PROCEDURE solution()
 BEGIN
-	SELECT * 
-    FROM expressions
-    WHERE (operation='+' AND c=a+b)
-        OR(operation='-' AND c=a-b)
-        OR(operation='/' AND c=a/b)
-        OR(operation='*' AND c=a*b);
+	/* Write your SQL here. Terminate each statement with a semicolon. */
+	select *
+	from expressions
+	where 
+		(operation = '+' and a + b = c) 
+		OR (operation = '-' and a - b = c) 
+		OR (operation = '*' and a * b = c ) 
+		OR (operation = '/' and a / b = c)	;		
 END
